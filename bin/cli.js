@@ -62,12 +62,8 @@ console.log("== 微信群聊日报 ==");
 console.log("安装位置:", dest);
 console.log("");
 
-if (!fs.existsSync(path.join(dest, "run.py"))) {
-  console.log("正在复制项目文件...");
-  copyDir(src, dest);
-} else {
-  console.log("目录已存在，跳过复制。");
-}
+console.log("正在同步项目文件...");
+copyDir(src, dest);
 
 console.log("");
 console.log("[1/2] 安装依赖（3-5 分钟，含 Chromium）...");

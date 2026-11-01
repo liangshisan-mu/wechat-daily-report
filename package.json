@@ -1,6 +1,6 @@
 {
   "name": "wechat-daily-report",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turn a day of WeChat group chat into a research-report style poster",
   "bin": {
     "wechat-daily-report": "bin/cli.js"
