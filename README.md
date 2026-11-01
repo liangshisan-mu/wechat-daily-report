@@ -6,21 +6,21 @@
 
 ## 一行命令
 
-### 让本地 AI Agent 部署（推荐）
+复制到终端，或者直接粘给你的 Agent：
 
-把仓库链接丢给你的 Agent（WorkBuddy / Claude Code / Cursor），加一句：
-
-> 按仓库里的 `AGENTS.md` 部署并生成报告，不要让我手动敲命令。
-
-`https://github.com/l18028092047-crypto/wechat-daily-report`
-
-### 自己装（Windows PowerShell）
-
-```powershell
-irm https://raw.githubusercontent.com/l18028092047-crypto/wechat-daily-report/main/install.ps1 | iex
+```bash
+npx github:l18028092047-crypto/wechat-daily-report
 ```
 
-装完双击 **`生成报告.bat`**，输入群名和日期即可。
+带群名和日期，一步出图：
+
+```bash
+npx github:l18028092047-crypto/wechat-daily-report --group "群名" --date 2026-10-31
+```
+
+这一行会依次完成：下载项目 → 安装依赖 → 连接微信 → 生成长图。
+
+> 前提：Windows 10/11、微信 4.x 已登录、Python 3.10+。首次约 3-5 分钟，之后可重复使用。
 
 ## 它做什么
 
@@ -30,14 +30,11 @@ irm https://raw.githubusercontent.com/l18028092047-crypto/wechat-daily-report/ma
 
 一张图包含：核心议题、数据、双栏对比、编号批注、群友发言（真实头像）、原话引用、行动清单。
 
-## 前提
-
-Windows 10/11 · 微信 4.x 已登录 · Python 3.12。
-
 ## 更多
 
 - [详细使用说明](docs/使用说明.md)
 - [给 AI Agent 的部署指令](AGENTS.md)
+- 备选安装（不用 npx）：`irm https://raw.githubusercontent.com/l18028092047-crypto/wechat-daily-report/main/install.ps1 | iex`
 
 ## 隐私
 
