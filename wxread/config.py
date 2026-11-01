@@ -10,13 +10,38 @@ ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = Path(os.environ.get("WXDR_CONFIG", str(ROOT / "config.json")))
 
 
+DEFAULTS = {
+    "python": "",
+    "skill_dir": "vendor/yichen-wechat-local-vault",
+    "source_id": "",
+    "db_root": "",
+    "snapshot_dir": "",
+    "export_dir": "exports",
+    "llm": {
+        "base_url": "https://api.deepseek.com/v1",
+        "api_key": "",
+        "model": "deepseek-chat",
+    },
+}
+
+
 def load() -> dict:
+    """容错加载：init 之前也能 import 本包。"""
+    if not CONFIG_PATH.exists():
+        return json.loads(json.dumps(DEFAULTS))
+    cfg = json.loads(json.dumps(DEFAULTS))
+    cfg.update(json.loads(CONFIG_PATH.read_text(encoding="utf-8")))
+    return cfg
+
+
+def require() -> dict:
+    """需要真实配置的命令用这个。"""
     if not CONFIG_PATH.exists():
         raise SystemExit(
             f"缺少配置文件：{CONFIG_PATH}\n"
-            "先复制 config.example.json 为 config.json，或运行：python run.py init"
+            "先运行：python run.py init"
         )
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    return load()
 
 
 def save(cfg: dict) -> None:

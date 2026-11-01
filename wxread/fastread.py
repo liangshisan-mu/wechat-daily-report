@@ -19,7 +19,10 @@ _scripts = config.skill_scripts()
 if str(_scripts) not in sys.path:
     sys.path.insert(0, str(_scripts))
 
-import snapshot_reader as sr  # noqa: E402
+try:
+    import snapshot_reader as sr  # noqa: E402
+except Exception:  # 初始化阶段 vendor 可能还没拉下来
+    sr = None
 
 LATEST = config.snapshot_root() / "latest.json"
 
@@ -41,6 +44,10 @@ def snapshot() -> Path:
 
 
 def _ensure() -> Path:
+    if sr is None:
+        raise RuntimeError(
+            "找不到 snapshot_reader。先运行 setup.ps1，或把 config.json 的 skill_dir 指到 yichen-wechat-local-vault。"
+        )
     snap = snapshot()
     key = str(snap)
     if _state["snap"] != key:

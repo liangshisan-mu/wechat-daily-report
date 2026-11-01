@@ -33,7 +33,7 @@ SNAPSHOT_ROOT = LATEST.parent / "snapshots"
 
 
 def _cfg() -> dict:
-    return config.load()
+    return config.require()
 
 
 def _die(msg: str, code: int = 1):
