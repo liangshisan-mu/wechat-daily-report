@@ -83,6 +83,7 @@ def find_db_storages(root: Path) -> list[Path]:
 
 
 def cmd_init(args):
+    auto = bool(getattr(args, "auto", False))
     print("== 初始化 ==")
     roots = find_db_roots()
     if not roots:
@@ -92,7 +93,7 @@ def cmd_init(args):
     for i, p in enumerate(roots, 1):
         print(f"  {i}. {p}")
     idx = 1
-    if len(roots) > 1:
+    if len(roots) > 1 and not auto:
         raw = input("选择哪一个（序号，回车默认 1）：").strip()
         idx = int(raw) if raw.isdigit() and 1 <= int(raw) <= len(roots) else 1
     root = roots[idx - 1]
@@ -104,7 +105,7 @@ def cmd_init(args):
     for i, p in enumerate(storages, 1):
         print(f"  {i}. {p.parent.name}")
     sidx = 1
-    if len(storages) > 1:
+    if len(storages) > 1 and not auto:
         raw = input("选择账号（序号，回车默认 1）：").strip()
         sidx = int(raw) if raw.isdigit() and 1 <= int(raw) <= len(storages) else 1
     db_root = storages[sidx - 1]
@@ -310,6 +311,7 @@ def build_parser():
     sub = p.add_subparsers(dest="cmd", required=True)
 
     i = sub.add_parser("init", help="初始化配置")
+    i.add_argument("--auto", action="store_true", help="自动选择第一个数据目录与账号，不交互")
     i.set_defaults(func=cmd_init)
 
     r = sub.add_parser("refresh", help="采集最新快照")
