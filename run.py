@@ -79,7 +79,10 @@ def find_db_roots() -> list[Path]:
 
 
 def find_db_storages(root: Path) -> list[Path]:
-    return sorted([p for p in root.glob("*/db_storage") if p.is_dir()])
+    """按最近使用时间排序，--auto 时优先选活跃账号。"""
+    items = [p for p in root.glob("*/db_storage") if p.is_dir()]
+    items.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+    return items
 
 
 def cmd_init(args):
@@ -101,9 +104,10 @@ def cmd_init(args):
     storages = find_db_storages(root)
     if not storages:
         _die(f"{root} 下没有 */db_storage，可能还没登录过微信。")
-    print("\n找到这些账号的数据目录：")
+    print("\n找到这些账号的数据目录（按最近使用排序）：")
     for i, p in enumerate(storages, 1):
-        print(f"  {i}. {p.parent.name}")
+        mt = datetime.fromtimestamp(p.stat().st_mtime).strftime("%m-%d %H:%M")
+        print(f"  {i}. {p.parent.name}   最近使用 {mt}")
     sidx = 1
     if len(storages) > 1 and not auto:
         raw = input("选择账号（序号，回车默认 1）：").strip()
