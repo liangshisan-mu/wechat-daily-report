@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>{{ page_title }}</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#F4F1E8; --ink:#232323; --green:#1C3A2A; --green2:#16301F;
+    --clay:#B65C34; --line:#CFC7B6; --muted:#8A8577; --card:#EDE7D8;
+  }
+  body{background:#DDD6C7;}
+  .page{
+    width:900px; margin:0 auto; background:var(--bg); padding:42px 52px 36px;
+    font-family:"Songti SC","STSong","SimSun",serif;
+    color:var(--ink); -webkit-font-smoothing:antialiased;
+  }
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+  .brand{background:var(--green);color:#F4F1E8;font-size:11px;letter-spacing:2px;
+         padding:7px 14px;border-radius:2px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .top .date{font-size:11px;color:var(--muted);letter-spacing:1px;}
+  h1{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+     font-size:58px;line-height:1.22;font-weight:800;color:var(--green);letter-spacing:1px;}
+  h1 .clay{color:var(--clay);}
+  .sub{font-size:15px;color:#4A4A44;line-height:1.9;margin-top:18px;max-width:760px;}
+  .pills{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+  .pill{font-size:11px;color:#4A4A44;border:1px solid var(--line);border-radius:4px;
+        padding:6px 12px;background:#FAF8F2;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .rule{border:none;border-top:1px solid var(--green);margin:24px 0 26px;}
+  .lead{background:var(--green);border-radius:6px;padding:30px 30px 32px;position:relative;}
+  .tag{display:inline-block;background:var(--clay);color:#fff;font-size:10px;letter-spacing:1px;
+       padding:4px 9px;border-radius:2px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;margin-bottom:14px;}
+  .lead p{color:#F1EBDB;font-size:20px;line-height:1.85;font-weight:600;}
+  .sh{margin:38px 0 14px;display:flex;align-items:baseline;gap:10px;}
+  .sh .no{color:var(--clay);font-size:17px;font-weight:700;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .sh h2{font-size:23px;font-weight:800;color:var(--green);
+         font-family:"PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:.5px;}
+  p.body{font-size:15.5px;line-height:1.95;color:#33332E;margin-bottom:14px;}
+  p.body b{color:var(--green);font-weight:800;}
+  .stats{display:flex;gap:0;margin:14px 0 8px;}
+  .st{flex:1;}
+  .st .n{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:40px;font-weight:800;color:var(--green);line-height:1;}
+  .st .n i{font-style:normal;font-size:22px;}
+  .st .l{font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.5px;}
+  .mini{margin-top:22px;}
+  .mini h3{font-size:16.5px;font-weight:800;color:var(--green);margin-bottom:7px;
+           font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .mini p{font-size:15px;line-height:1.9;color:#3A3A34;}
+  .two{display:flex;gap:16px;margin-top:8px;}
+  .col{flex:1;border-radius:6px;padding:24px 22px;}
+  .col.l{background:var(--card);}
+  .col.r{background:var(--green);}
+  .col .tag{margin-bottom:10px;}
+  .col h4{font-size:16px;font-weight:800;margin-bottom:12px;
+          font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:var(--green);}
+  .col.r h4{color:#F1EBDB;}
+  .col ul{list-style:none;}
+  .col li{font-size:14px;line-height:1.75;padding-left:14px;position:relative;margin-bottom:9px;color:#3A3A34;}
+  .col.r li{color:#E4DDCB;}
+  .col li::before{content:"";position:absolute;left:0;top:9px;width:4px;height:4px;border-radius:50%;background:var(--clay);}
+  .col.r li::before{background:#C98A5E;}
+  .nlist{margin-top:10px;}
+  .item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #DCD4C4;}
+  .item:last-child{border-bottom:none;}
+  .rail{flex:none;width:16px;display:flex;flex-direction:column;align-items:center;padding-top:5px;}
+  .dot{width:9px;height:9px;border:1.2px solid var(--clay);border-radius:50%;background:transparent;flex:none;}
+  .item .c{flex:1;}
+  .item .sn{font-size:10px;color:#A39C8C;letter-spacing:1px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .item .tt{font-size:15.5px;font-weight:800;color:var(--green);margin:2px 0 3px;
+            font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .item .dd{font-size:13.5px;line-height:1.75;color:#4A4A44;}
+  .people{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+  .pc{background:#fff;border:1px solid #E2DACA;border-radius:8px;padding:18px 18px 14px;}
+  .ph{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+  .av{overflow:hidden;width:30px;height:30px;border-radius:50%;background:var(--green);color:#F1EBDB;
+      font-size:12px;display:flex;align-items:center;justify-content:center;flex:none;
+      font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
+  .nm{font-size:13px;font-weight:800;color:var(--green);font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .rl{font-size:9px;color:#8A8577;background:#F1ECE0;padding:2px 6px;border-radius:2px;margin-left:auto;
+      font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .pc ul{list-style:none;}
+  .pc li{font-size:12.5px;line-height:1.7;color:#3A3A34;padding-left:11px;position:relative;margin-bottom:5px;}
+  .pc li::before{content:"";position:absolute;left:0;top:7px;width:3px;height:3px;border-radius:50%;background:#B0A896;}
+  .pc .ft{font-size:10px;color:#A39C8C;margin-top:8px;border-top:1px dashed #E6DECD;padding-top:7px;}
+  .quotes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+  .q{border-radius:6px;padding:20px 20px 16px;position:relative;background:#FBF8F0;border:1px solid #E6DECD;}
+  .q.dark{background:var(--green);border-color:var(--green);}
+  .q .mark{font-family:Georgia,serif;font-size:34px;line-height:0.6;color:var(--clay);display:block;margin-bottom:12px;}
+  .q.dark .mark{color:#C98A5E;}
+  .q .tx{font-size:14px;line-height:1.8;color:#33332E;}
+  .q.dark .tx{color:#EDE6D4;}
+  .q .sg{font-size:10.5px;color:#A39C8C;margin-top:12px;letter-spacing:.5px;}
+  .q.dark .sg{color:#9DB0A2;}
+  .check{background:#fff;border:1px solid #E2DACA;border-radius:8px;padding:24px 24px 18px;margin-top:6px;}
+  .ck{display:flex;gap:11px;align-items:flex-start;padding:8px 0;}
+  .box{flex:none;width:14px;height:14px;border:1.4px solid var(--green);border-radius:2px;margin-top:3px;}
+  .ck p{font-size:14px;line-height:1.7;color:#33332E;}
+  .note{background:#ECE8DE;border-radius:6px;padding:20px 22px;margin-top:16px;}
+  .note h5{font-size:13.5px;font-weight:800;color:var(--green);margin-bottom:8px;
+           font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .note p{font-size:12.5px;line-height:1.85;color:#4A4A44;}
+  .close{background:var(--green);border-radius:6px;padding:28px 28px 30px;margin-top:16px;}
+  .close p{color:#F1EBDB;font-size:16.5px;line-height:1.9;}
+  .foot{display:flex;justify-content:space-between;margin-top:30px;padding-top:12px;border-top:1px solid #CFC7B6;}
+  .foot div{font-size:10.5px;color:#8A8577;letter-spacing:.5px;line-height:1.8;}
+  .foot div:last-child{text-align:right;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top">
+    <div class="brand">{{ brand }}</div>
+    <div class="date">{{ date_label }}</div>
+  </div>
+
+  <h1>{{ title1 }}<br><span class="clay">{{ title2 }}</span></h1>
+  <p class="sub">{{ subtitle }}</p>
+
+  <div class="pills">
+    {% for p in pills %}<span class="pill">{{ p }}</span>{% endfor %}
+  </div>
+
+  <hr class="rule">
+
+  <div class="lead">
+    <span class="tag">{{ lead_tag }}</span>
+    <p>{{ lead }}</p>
+  </div>
+
+  <div class="sh"><span class="no">01</span><h2>{{ s1_title }}</h2></div>
+  <p class="body">{{ s1_body | safe }}</p>
+
+  <div class="stats">
+    {% for s in stats %}
+    <div class="st"><div class="n">{{ s.num }}<i> {{ s.unit }}</i></div><div class="l">{{ s.label }}</div></div>
+    {% endfor %}
+  </div>
+
+  {% for m in minis %}
+  <div class="mini">
+    <h3>{{ m.title }}</h3>
+    <p>{{ m.body }}</p>
+  </div>
+  {% endfor %}
+
+  <div class="sh"><span class="no">02</span><h2>{{ s2_title }}</h2></div>
+  <div class="two">
+    <div class="col l">
+      <span class="tag">{{ two.left.tag }}</span>
+      <h4>{{ two.left.title }}</h4>
+      <ul>{% for i in two.left['items'] %}<li>{{ i }}</li>{% endfor %}</ul>
+    </div>
+    <div class="col r">
+      <span class="tag">{{ two.right.tag }}</span>
+      <h4>{{ two.right.title }}</h4>
+      <ul>{% for i in two.right['items'] %}<li>{{ i }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+
+  <div class="sh"><span class="no">03</span><h2>{{ s3_title }}</h2></div>
+  <div class="nlist">
+    {% for n in notes %}
+    <div class="item"><div class="rail"><span class="dot"></span></div><div class="c">
+      <div class="sn">{{ n.no }}</div><div class="tt">{{ n.title }}</div><div class="dd">{{ n.desc }}</div>
+    </div></div>
+    {% endfor %}
+  </div>
+
+  <div class="sh"><span class="no">04</span><h2>{{ s4_title }}</h2></div>
+  <div class="people">
+    {% for p in people %}
+    <div class="pc">
+      <div class="ph">
+        <div class="av">{% if p.avatar %}<img src="{{ p.avatar }}" alt="">{% else %}{{ p.initial }}{% endif %}</div>
+        <div class="nm">{{ p.name }}</div><div class="rl">{{ p.role }}</div>
+      </div>
+      <ul>{% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+      <div class="ft">{{ p.foot }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="sh"><span class="no">05</span><h2>{{ s5_title }}</h2></div>
+  <div class="quotes">
+    {% for q in quotes %}
+    <div class="q{% if q.dark %} dark{% endif %}"><span class="mark">"</span><div class="tx">{{ q.text }}</div><div class="sg">— {{ q.source }}</div></div>
+    {% endfor %}
+  </div>
+
+  <div class="sh"><span class="no">06</span><h2>{{ s6_title }}</h2></div>
+  <p class="body" style="margin-bottom:10px;">{{ s6_hint }}</p>
+  <div class="check">
+    {% for c in checklist %}<div class="ck"><span class="box"></span><p>{{ c }}</p></div>{% endfor %}
+  </div>
+
+  <div class="note">
+    <h5>{{ note_title }}</h5>
+    <p>{{ note_body }}</p>
+  </div>
+
+  <div class="close">
+    <span class="tag">{{ closing_tag }}</span>
+    <p>{{ closing }}</p>
+  </div>
+
+  <div class="foot">
+    <div>{{ footer_left }}</div>
+    <div>{{ footer_right }}</div>
+  </div>
+
+</div>
+</body>
+</html>
