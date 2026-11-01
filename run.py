@@ -78,10 +78,19 @@ def find_db_roots() -> list[Path]:
     return res
 
 
+def _recent_ts(storage: Path) -> float:
+    """用 message 库的最后修改时间判断活跃度，目录 mtime 不可靠。"""
+    msg = storage / "message"
+    files = list(msg.glob("*.db")) if msg.is_dir() else []
+    if files:
+        return max(f.stat().st_mtime for f in files)
+    return storage.stat().st_mtime
+
+
 def find_db_storages(root: Path) -> list[Path]:
     """按最近使用时间排序，--auto 时优先选活跃账号。"""
     items = [p for p in root.glob("*/db_storage") if p.is_dir()]
-    items.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+    items.sort(key=_recent_ts, reverse=True)
     return items
 
 
@@ -106,7 +115,7 @@ def cmd_init(args):
         _die(f"{root} 下没有 */db_storage，可能还没登录过微信。")
     print("\n找到这些账号的数据目录（按最近使用排序）：")
     for i, p in enumerate(storages, 1):
-        mt = datetime.fromtimestamp(p.stat().st_mtime).strftime("%m-%d %H:%M")
+        mt = datetime.fromtimestamp(_recent_ts(p)).strftime("%m-%d %H:%M")
         print(f"  {i}. {p.parent.name}   最近使用 {mt}")
     sidx = 1
     if len(storages) > 1 and not auto:
