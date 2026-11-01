@@ -137,11 +137,12 @@ def cmd_init(args):
             data = {}
 
     source_id = ""
-    sources = data.get("sources") or data.get("processes") or []
-    if isinstance(sources, list) and sources:
-        first = sources[0]
-        if isinstance(first, dict):
-            source_id = str(first.get("source_id") or first.get("id") or "")
+    for key in ("accounts", "sources", "processes"):
+        items = data.get(key) or []
+        if isinstance(items, list) and items and isinstance(items[0], dict):
+            source_id = str(items[0].get("source_id") or items[0].get("id") or "")
+            if source_id:
+                break
     source_id = source_id or str(data.get("source_id") or "")
 
     cfg = {
