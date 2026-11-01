@@ -9,13 +9,13 @@
 复制到终端，或者直接粘给你的 Agent：
 
 ```bash
-npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git
+npx --yes git+https://github.com/liangshisan-mu/wechat-daily-report.git
 ```
 
 带群名和日期，一步出图：
 
 ```bash
-npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git --group "群名" --date 2026-10-31
+npx --yes git+https://github.com/liangshisan-mu/wechat-daily-report.git --group "群名" --date 2026-10-31
 ```
 
 这一行会依次完成：下载项目 → 安装依赖 → 连接微信 → 生成长图。
@@ -34,7 +34,7 @@ npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git --g
 
 - [详细使用说明](docs/使用说明.md)
 - [给 AI Agent 的部署指令](AGENTS.md)
-- 备选安装（不用 npx）：`irm https://raw.githubusercontent.com/l18028092047-crypto/wechat-daily-report/main/install.ps1 | iex`
+- 备选安装（不用 npx）：`irm https://raw.githubusercontent.com/liangshisan-mu/wechat-daily-report/main/install.ps1 | iex`
 
 ## 隐私
 

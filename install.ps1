@@ -1,9 +1,9 @@
 ﻿# 一行安装脚本（Windows）
 # 用法：
-#   irm https://raw.githubusercontent.com/l18028092047-crypto/wechat-daily-report/main/install.ps1 | iex
+#   irm https://raw.githubusercontent.com/liangshisan-mu/wechat-daily-report/main/install.ps1 | iex
 
 $ErrorActionPreference = "Stop"
-$repo = "l18028092047-crypto/wechat-daily-report"
+$repo = "liangshisan-mu/wechat-daily-report"
 $dest = Join-Path $env:USERPROFILE "wechat-daily-report"
 
 Write-Host ""

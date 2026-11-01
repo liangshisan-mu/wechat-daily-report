@@ -2,7 +2,7 @@
 
 给本地 AI Agent 的部署与使用指令。用户把仓库链接发给你时，按这里执行，**不要让用户手动敲命令**。
 
-仓库：`https://github.com/l18028092047-crypto/wechat-daily-report`
+仓库：`https://github.com/liangshisan-mu/wechat-daily-report`
 
 ---
 
@@ -30,7 +30,7 @@ Get-Process | Where-Object {$_.ProcessName -match 'Weixin|WeChat'}
 
 ```powershell
 # 1. 获取代码（二选一）
-git clone https://github.com/l18028092047-crypto/wechat-daily-report.git
+git clone https://github.com/liangshisan-mu/wechat-daily-report.git
 # 或下载 ZIP 解压
 
 # 2. 进入目录
