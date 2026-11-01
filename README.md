@@ -9,13 +9,13 @@
 复制到终端，或者直接粘给你的 Agent：
 
 ```bash
-npx github:l18028092047-crypto/wechat-daily-report
+npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git
 ```
 
 带群名和日期，一步出图：
 
 ```bash
-npx github:l18028092047-crypto/wechat-daily-report --group "群名" --date 2026-10-31
+npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git --group "群名" --date 2026-10-31
 ```
 
 这一行会依次完成：下载项目 → 安装依赖 → 连接微信 → 生成长图。

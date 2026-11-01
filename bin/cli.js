@@ -2,8 +2,8 @@
 /**
  * npx 启动器：把仓库复制到用户目录，装依赖，连接微信，可选直接出图。
  *
- *   npx github:l18028092047-crypto/wechat-daily-report
- *   npx github:l18028092047-crypto/wechat-daily-report --group "群名" --date 2026-10-31
+ *   npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git
+ *   npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git --group "群名" --date 2026-10-31
  */
 const fs = require("fs");
 const path = require("path");
@@ -22,10 +22,10 @@ if (has("-h") || has("--help")) {
 微信群聊 → 日报长图
 
 用法:
-  npx github:l18028092047-crypto/wechat-daily-report
+  npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git
       安装到 ~/wechat-daily-report 并连接微信
 
-  npx github:l18028092047-crypto/wechat-daily-report --group "群名" --date 2026-10-31
+  npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git --group "群名" --date 2026-10-31
       安装后直接生成指定群、指定日期的长图
 
 前提:
@@ -107,5 +107,5 @@ if (group && date) {
   console.log("");
   console.log("安装完成。下一步：");
   console.log("  双击", path.join(dest, "生成报告.bat"));
-  console.log("  或运行 npx github:l18028092047-crypto/wechat-daily-report --group \"群名\" --date 2026-10-31");
+  console.log("  或运行 npx --yes git+https://github.com/l18028092047-crypto/wechat-daily-report.git --group \"群名\" --date 2026-10-31");
 }
